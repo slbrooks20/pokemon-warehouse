@@ -15,10 +15,10 @@ dbt/profiles.yml
 dbt/package-lock.yml
 
 # GCP credentials
-*.json
-!dbt/dbt_project.yml
-!dbt/packages.yml
-!dbt/models/**/*.yml
+gcp-key.json
+
+# dbt profiles (contains credentials)
+dbt/profiles.yml
 
 # Ingestion logs
 ingestion/smogon/full_run*.log
