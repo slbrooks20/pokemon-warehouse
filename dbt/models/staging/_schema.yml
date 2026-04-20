@@ -1,0 +1,224 @@
+version: 2
+
+models:
+  - name: stg_pokeapi_pokemon
+    description: "Staged Pokémon data from PokéAPI — one row per Pokémon form"
+    columns:
+      - name: pokemon_id
+        description: "PokéAPI Pokémon ID"
+        tests:
+          - unique
+          - not_null
+      - name: pokemon_name
+        tests:
+          - not_null
+      - name: base_experience
+      - name: height
+      - name: weight
+      - name: sort_order
+      - name: species_name
+        tests:
+          - not_null
+      - name: types_json
+      - name: stats_json
+      - name: abilities_json
+      - name: moves_json
+      - name: sprite_url
+      - name: ingested_at
+        tests:
+          - not_null
+      - name: source_url
+        tests:
+          - not_null
+
+  - name: stg_pokeapi_moves
+    description: "Staged move data from PokéAPI — one row per move"
+    columns:
+      - name: move_id
+        description: "PokéAPI move ID"
+        tests:
+          - unique
+          - not_null
+      - name: move_name
+        tests:
+          - not_null
+      - name: move_type
+        tests:
+          - not_null
+      - name: damage_class
+        tests:
+          - not_null
+          - accepted_values:
+              values: ["physical", "special", "status"]
+      - name: power
+      - name: accuracy
+      - name: pp
+      - name: priority
+      - name: target
+      - name: effect_short
+      - name: ingested_at
+        tests:
+          - not_null
+      - name: source_url
+        tests:
+          - not_null
+
+  - name: stg_pokeapi_types
+    description: "Staged type data from PokéAPI — one row per type"
+    columns:
+      - name: type_id
+        description: "PokéAPI type ID"
+        tests:
+          - unique
+          - not_null
+      - name: type_name
+        tests:
+          - not_null
+          - unique
+      - name: double_damage_to
+      - name: half_damage_to
+      - name: no_damage_to
+      - name: double_damage_from
+      - name: half_damage_from
+      - name: no_damage_from
+      - name: ingested_at
+        tests:
+          - not_null
+      - name: source_url
+        tests:
+          - not_null
+
+  - name: stg_pokeapi_abilities
+    description: "Staged ability data from PokéAPI — one row per ability"
+    columns:
+      - name: ability_id
+        description: "PokéAPI ability ID"
+        tests:
+          - unique
+          - not_null
+      - name: ability_name
+        tests:
+          - not_null
+      - name: is_main_series
+      - name: generation
+      - name: effect_short
+      - name: pokemon_json
+      - name: ingested_at
+        tests:
+          - not_null
+      - name: source_url
+        tests:
+          - not_null
+
+  - name: stg_pokeapi_evolutions
+    description: "Staged evolution chain data from PokéAPI — one row per chain"
+    columns:
+      - name: chain_id
+        description: "PokéAPI evolution chain ID"
+        tests:
+          - unique
+          - not_null
+      - name: base_species
+        tests:
+          - not_null
+      - name: chain_json
+      - name: ingested_at
+        tests:
+          - not_null
+      - name: source_url
+        tests:
+          - not_null
+
+  - name: stg_smogon_usage
+    description: "Staged Smogon usage stats — one row per (pokemon, tier, month)"
+    columns:
+      - name: usage_id
+        description: "Surrogate key from (pokemon_name, tier, month)"
+        tests:
+          - unique
+          - not_null
+      - name: pokemon_name
+        tests:
+          - not_null
+      - name: tier
+        tests:
+          - not_null
+      - name: month
+        tests:
+          - not_null
+      - name: usage_pct
+        tests:
+          - not_null
+      - name: rank
+        tests:
+          - not_null
+      - name: raw_count
+        tests:
+          - not_null
+      - name: ingested_at
+        tests:
+          - not_null
+
+  - name: stg_smogon_movesets
+    description: "Staged Smogon chaos payloads — one row per (tier, month)"
+    columns:
+      - name: moveset_file_id
+        description: "Surrogate key from (tier, month)"
+        tests:
+          - unique
+          - not_null
+      - name: tier
+        tests:
+          - not_null
+      - name: month
+        tests:
+          - not_null
+      - name: source_url
+        tests:
+          - not_null
+      - name: payload
+        tests:
+          - not_null
+      - name: ingested_at
+        tests:
+          - not_null
+
+  - name: stg_smogon_teammates
+    description: "Staged Smogon teammate co-occurrence — one row per (pokemon, teammate, tier, month)"
+    columns:
+      - name: teammate_id
+        description: "Surrogate key from (pokemon_name, teammate_name, tier, month)"
+        tests:
+          - unique
+          - not_null
+      - name: pokemon_name
+        tests:
+          - not_null
+      - name: teammate_name
+        tests:
+          - not_null
+      - name: tier
+        tests:
+          - not_null
+      - name: month
+        tests:
+          - not_null
+      - name: usage_rate
+        tests:
+          - not_null
+      - name: ingested_at
+        tests:
+          - not_null
+
+  - name: stg_pkmn_sets
+    description: "Staged pkmn.cc recommended sets — full JSON payload"
+    columns:
+      - name: ingested_at
+        tests:
+          - not_null
+      - name: source_url
+        tests:
+          - not_null
+      - name: payload
+        tests:
+          - not_null

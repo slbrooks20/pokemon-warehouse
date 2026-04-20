@@ -1,0 +1,16 @@
+# Ingestion
+requests==2.31.0
+google-cloud-bigquery==3.17.2
+google-auth==2.29.0
+
+# dbt
+dbt-core==1.8.3
+dbt-bigquery==1.8.2
+
+# Dev / quality
+ruff==0.4.4
+
+# NOTE: Airflow is NOT installed here.
+# It runs in Docker (Phase 4). See dags/docker-compose.yml.
+# If you need a local Airflow for development only:
+#   pip install apache-airflow==2.7.2

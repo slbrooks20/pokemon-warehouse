@@ -1,0 +1,69 @@
+version: 2
+
+models:
+  - name: int_type_matchups
+    description: "18×18 type effectiveness matrix — every attacking/defending type pair with multiplier"
+    columns:
+      - name: attacking_type
+        tests:
+          - not_null
+      - name: defending_type
+        tests:
+          - not_null
+      - name: effectiveness
+        description: "Damage multiplier: 0.0, 0.5, 1.0, or 2.0"
+        tests:
+          - not_null
+          - accepted_values:
+              values: [0.0, 0.5, 1.0, 2.0]
+
+  - name: int_pokemon_movepool
+    description: "Pokémon × learnable move — one row per (pokemon, move)"
+    columns:
+      - name: pokemon_id
+        tests:
+          - not_null
+      - name: pokemon_name
+        tests:
+          - not_null
+      - name: move_name
+        tests:
+          - not_null
+
+  - name: int_usage_trends
+    description: "Month-over-month usage deltas per (pokemon, tier)"
+    columns:
+      - name: usage_id
+        tests:
+          - not_null
+      - name: pokemon_name
+        tests:
+          - not_null
+      - name: tier
+        tests:
+          - not_null
+      - name: month
+        tests:
+          - not_null
+
+  - name: int_teammate_pairs
+    description: "Teammate co-occurrence enriched with both Pokémon's usage stats"
+    columns:
+      - name: teammate_id
+        tests:
+          - not_null
+      - name: pokemon_name
+        tests:
+          - not_null
+      - name: teammate_name
+        tests:
+          - not_null
+      - name: tier
+        tests:
+          - not_null
+      - name: month
+        tests:
+          - not_null
+      - name: co_occurrence_rate
+        tests:
+          - not_null

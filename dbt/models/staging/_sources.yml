@@ -1,0 +1,25 @@
+version: 2
+
+sources:
+  - name: raw
+    database: pokemon-warehouse-2026
+    schema: raw
+    tables:
+      - name: raw_pokemon
+        description: "Raw PokéAPI /pokemon responses"
+      - name: raw_moves
+        description: "Raw PokéAPI /move responses"
+      - name: raw_types
+        description: "Raw PokéAPI /type responses"
+      - name: raw_abilities
+        description: "Raw PokéAPI /ability responses"
+      - name: raw_evolutions
+        description: "Raw PokéAPI /evolution-chain responses"
+      - name: raw_usage
+        description: "Smogon usage stats — one row per (pokemon, tier, month)"
+      - name: raw_movesets
+        description: "Smogon chaos JSON — full payload per (tier, month)"
+      - name: raw_teammates
+        description: "Smogon teammate co-occurrence — one row per (pokemon, teammate, tier, month)"
+      - name: raw_sets
+        description: "pkmn.cc recommended sets — full JSON blob"
